@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri:  mongodb://j155:Top_secret_password@mongodb.mikr.dev:27017/db_j155
