@@ -18,7 +18,6 @@ import pl.lechowicz.queansserver.user.repository.UserRepository;
 
 import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -74,10 +73,10 @@ public class UserService {
         if (!this.authoritiesRepository.findAll().isEmpty()) {
             return;
         }
-//        var entry1 = new Authorities(AuthorityType.ROLE_ADMIN, Set.of());
-        var entry2 = new Authorities(AuthorityType.ROLE_USER, Set.of());
+        var entry1 = new Authorities(AuthorityType.ROLE_ADMIN);
+        var entry2 = new Authorities(AuthorityType.ROLE_USER);
 
-//        authoritiesRepository.save(entry1);
+        authoritiesRepository.save(entry1);
         authoritiesRepository.save(entry2);
     }
 }
