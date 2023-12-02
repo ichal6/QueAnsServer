@@ -1,14 +1,15 @@
 package pl.lechowicz.queansserver.entry.entity;
 
-import lombok.*;
 import pl.lechowicz.queansserver.common.Entity;
 
-@NoArgsConstructor
 public class AnswerEntity extends Entity {
     private String answer;
 
     public AnswerEntity(String answer) {
         this.answer = answer;
+    }
+
+    public AnswerEntity() {
     }
 
     public String getAnswer() {

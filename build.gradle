@@ -26,7 +26,6 @@ dependencies {
     implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
 }
 
 tasks.named('bootBuildImage') {
