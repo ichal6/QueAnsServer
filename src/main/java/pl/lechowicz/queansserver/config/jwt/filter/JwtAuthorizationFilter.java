@@ -65,7 +65,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                     .verify(token)
                     .getSubject();
             if (userName != null) {
-                UserDetails userDetails = null;
+                UserDetails userDetails;
                 try{
                     userDetails = userDetailsService.loadUserByUsername(userName);
                 } catch (UsernameNotFoundException ex){

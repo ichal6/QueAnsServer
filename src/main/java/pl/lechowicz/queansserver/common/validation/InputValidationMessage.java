@@ -10,7 +10,7 @@ public enum InputValidationMessage {
 
     public final String message;
 
-    private InputValidationMessage(String message) {
+    InputValidationMessage(String message) {
         this.message = message;
     }
 }
