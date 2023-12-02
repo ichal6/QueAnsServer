@@ -13,7 +13,8 @@ import java.time.format.DateTimeParseException;
 public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleJSONParseException(HttpMessageNotReadableException httpMessageNotReadableException) {
-        String message = "Couldn't process your request. Your JSON is the wrong format";
+        String message = String.format("Couldn't process your request. Your JSON is the wrong format. Error message: %s",
+                httpMessageNotReadableException.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
 
