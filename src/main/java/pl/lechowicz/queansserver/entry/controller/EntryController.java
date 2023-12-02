@@ -1,20 +1,22 @@
-package pl.lechowicz.queansserver.entry;
+package pl.lechowicz.queansserver.entry.controller;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.lechowicz.queansserver.entry.repository.EntryRepository;
 import pl.lechowicz.queansserver.entry.entity.AnswerEntity;
 import pl.lechowicz.queansserver.entry.entity.EntryEntity;
 import pl.lechowicz.queansserver.entry.entity.QuestionEntity;
+import pl.lechowicz.queansserver.entry.modelDTO.EntryDTO;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/entry")
+@RequestMapping("/api/entry")
 public class EntryController {
     private final EntryRepository entryRepository;
     public EntryController(EntryRepository entryRepository) {
@@ -40,9 +42,9 @@ public class EntryController {
     }
 
     @GetMapping
-    public List<EntityDTO> getAll() {
+    public List<EntryDTO> getAll() {
         return this.entryRepository.findAll().stream()
-                .map(x -> new EntityDTO(
+                .map(x -> new EntryDTO(
                         x.getQuestions().stream().map(QuestionEntity::getQuestion)
                                 .collect(Collectors.toSet()),
                         x.getAnswers().stream().map(AnswerEntity::getAnswer)

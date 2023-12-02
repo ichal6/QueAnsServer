@@ -1,4 +1,4 @@
-package pl.lechowicz.queansserver.entry.entity;
+package pl.lechowicz.queansserver.common;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

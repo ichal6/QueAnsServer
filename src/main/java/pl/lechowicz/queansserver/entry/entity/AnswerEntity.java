@@ -1,6 +1,7 @@
 package pl.lechowicz.queansserver.entry.entity;
 
 import lombok.*;
+import pl.lechowicz.queansserver.common.Entity;
 
 @NoArgsConstructor
 public class AnswerEntity extends Entity {

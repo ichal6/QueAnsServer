@@ -1,16 +1,14 @@
 package pl.lechowicz.queansserver.entry.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import pl.lechowicz.queansserver.common.Entity;
 
 import java.util.Set;
 
 @NoArgsConstructor
 @Document
-public class EntryEntity extends Entity{
+public class EntryEntity extends Entity {
     private Set<QuestionEntity> questions;
 
     private Set<AnswerEntity> answers;
