@@ -24,14 +24,23 @@ public class InputValidator {
     }
 
     public void checkPassword(String password) throws InputIncorrectException {
-        // TODO - should add more password validation logic and message to enum
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$";
+
+        Pattern pattern = Pattern.compile(regex);
+
         if (password == null || password.isBlank()) {
-            throw new InputIncorrectException(InputValidationMessage.PASSWORD);
+            throw new InputIncorrectException(InputValidationMessage.PASSWORD_EMPTY);
+        }
+
+        Matcher matcher = pattern.matcher(password);
+
+        if (!matcher.matches()) {
+            throw new InputIncorrectException(InputValidationMessage.PASSWORD_INCORRECT);
         }
     }
 
-    public <T> void isNotNull(T object) throws InputIncorrectException {
-        if (object == null) {
+    public <T> void isNotNull(T t) throws InputIncorrectException {
+        if (t == null) {
             throw new InputIncorrectException(InputValidationMessage.NULL);
         }
     }
