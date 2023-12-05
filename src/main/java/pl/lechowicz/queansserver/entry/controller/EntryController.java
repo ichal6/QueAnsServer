@@ -8,6 +8,7 @@ import pl.lechowicz.queansserver.entry.entity.EntryEntity;
 import pl.lechowicz.queansserver.entry.entity.QuestionEntity;
 import pl.lechowicz.queansserver.entry.modelDTO.EntryDTO;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,12 @@ public class EntryController {
     @GetMapping
     public List<EntryDTO> getAll() {
         return this.entryRepository.findAll().stream()
+                .peek(e -> {
+                    if (e.getQuestions() == null)
+                        e.setQuestions(new HashSet<>());
+                    if (e.getAnswers() == null)
+                        e.setAnswers(new HashSet<>());
+                })
                 .map(x -> new EntryDTO(
                         x.getQuestions().stream().map(QuestionEntity::getQuestion)
                                 .collect(Collectors.toSet()),
