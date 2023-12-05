@@ -7,7 +7,6 @@ import pl.lechowicz.queansserver.entry.entity.AnswerEntity;
 import pl.lechowicz.queansserver.entry.entity.EntryEntity;
 import pl.lechowicz.queansserver.entry.modelDTO.NewAnswerDTO;
 import pl.lechowicz.queansserver.entry.modelDTO.SingleAnswerDTO;
-import pl.lechowicz.queansserver.entry.modelDTO.SingleQuestionDTO;
 import pl.lechowicz.queansserver.entry.repository.AnswerRepository;
 import pl.lechowicz.queansserver.entry.repository.EntryRepository;
 
