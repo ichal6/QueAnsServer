@@ -40,6 +40,6 @@ apply plugin: 'java'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'pl/lechowicz/queansserver/QueAnsServerApplication.java'
+        attributes 'Main-Class': 'pl/lechowicz/queansserver/QueAnsServerApplication'
     }
 }
