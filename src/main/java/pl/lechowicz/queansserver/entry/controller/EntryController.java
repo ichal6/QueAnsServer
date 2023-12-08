@@ -2,6 +2,7 @@ package pl.lechowicz.queansserver.entry.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.lechowicz.queansserver.entry.modelDTO.SingleQuestionDTO;
 import pl.lechowicz.queansserver.entry.repository.EntryRepository;
 import pl.lechowicz.queansserver.entry.entity.AnswerEntity;
 import pl.lechowicz.queansserver.entry.entity.EntryEntity;
@@ -11,6 +12,7 @@ import pl.lechowicz.queansserver.entry.service.EntryService;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -44,6 +46,11 @@ public class EntryController {
     @GetMapping("/{id}")
     public ResponseEntity<EntryDTO> getEntry(@PathVariable String id) {
         return ResponseEntity.of(this.entryService.getSingleEntry(id));
+    }
+
+    @GetMapping("/{id}/questions")
+    public ResponseEntity<Set<SingleQuestionDTO>> getQuestions(@PathVariable("id") String entryId) {
+        return ResponseEntity.ok(this.entryService.getQuestionsForEntry(entryId));
     }
 
     @PostMapping()

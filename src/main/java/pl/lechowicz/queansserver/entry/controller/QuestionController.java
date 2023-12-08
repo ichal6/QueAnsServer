@@ -19,6 +19,11 @@ public class QuestionController {
     public ResponseEntity<SingleQuestionDTO> getRandomSingleQuestion() {
         return ResponseEntity.ok(this.questionService.getRandomQuestion());
     }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<SingleQuestionDTO> getQuestion(@PathVariable String id) {
+        return ResponseEntity.of(this.questionService.getQuestion(id));
+    }
 
     @PostMapping("/{entryId}")
     public ResponseEntity<SingleQuestionDTO> insertQuestion(@RequestBody NewQuestionDTO questionDTO, @PathVariable("entryId") String entryId) {

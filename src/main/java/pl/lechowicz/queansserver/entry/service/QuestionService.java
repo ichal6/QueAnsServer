@@ -14,6 +14,8 @@ import pl.lechowicz.queansserver.entry.repository.EntryRepository;
 import pl.lechowicz.queansserver.entry.repository.QuestionRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class QuestionService {
@@ -26,14 +28,8 @@ public class QuestionService {
     }
 
     public SingleQuestionDTO getRandomQuestion() {
-
         return this.questionRepository.findRandom()
-                    .map(q -> {
-                        var dto = new SingleQuestionDTO(q.getId(), q.getQuestion());
-                        Link link = WebMvcLinkBuilder.linkTo(EntryController.class).slash(q.getParent().getId()).withRel("entry");
-                        dto.add(link);
-                        return dto;
-                    })
+                    .map(mapToDto())
                     .orElseThrow(()-> new ResourceNotFoundException(ResourceNotFoundException.Message.THE_SET_IS_EMPTY));
     }
 
@@ -49,5 +45,18 @@ public class QuestionService {
         entry.getQuestions().add(newQuestion);
         this.entryRepository.save(entry);
         return new SingleQuestionDTO(newQuestion.getId(), newQuestion.getQuestion());
+    }
+
+    public Optional<SingleQuestionDTO> getQuestion(String id) {
+        return this.questionRepository.findById(id).map(mapToDto());
+    }
+
+    public static Function<QuestionEntity, SingleQuestionDTO> mapToDto() {
+        return q -> {
+            var dto = new SingleQuestionDTO(q.getId(), q.getQuestion());
+            Link link = WebMvcLinkBuilder.linkTo(EntryController.class).slash(q.getParent().getId()).withRel("entry");
+            dto.add(link);
+            return dto;
+        };
     }
 }
