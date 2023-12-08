@@ -35,3 +35,11 @@ tasks.named('bootBuildImage') {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+apply plugin: 'java'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'pl/lechowicz/queansserver/QueAnsServerApplication.java'
+    }
+}
