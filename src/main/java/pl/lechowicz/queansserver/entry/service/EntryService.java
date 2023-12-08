@@ -4,11 +4,12 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 import pl.lechowicz.queansserver.common.exception.ResourceNotFoundException;
-import pl.lechowicz.queansserver.entry.controller.AnswerController;
 import pl.lechowicz.queansserver.entry.controller.EntryController;
 import pl.lechowicz.queansserver.entry.entity.EntryEntity;
 import pl.lechowicz.queansserver.entry.modelDTO.EntryDTO;
+import pl.lechowicz.queansserver.entry.modelDTO.SingleAnswerDTO;
 import pl.lechowicz.queansserver.entry.modelDTO.SingleQuestionDTO;
+import pl.lechowicz.queansserver.entry.repository.AnswerRepository;
 import pl.lechowicz.queansserver.entry.repository.EntryRepository;
 import pl.lechowicz.queansserver.entry.entity.QuestionEntity;
 import pl.lechowicz.queansserver.entry.entity.AnswerEntity;
@@ -24,10 +25,14 @@ import java.util.stream.Collectors;
 public class EntryService {
     private final EntryRepository entryRepository;
     private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
 
-    public EntryService(EntryRepository entryRepository, QuestionRepository questionRepository) {
+    public EntryService(EntryRepository entryRepository,
+                        QuestionRepository questionRepository,
+                        AnswerRepository answerRepository) {
         this.entryRepository = entryRepository;
         this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
     }
 
     public Optional<EntryDTO> getSingleEntry(String entryId) {
@@ -42,6 +47,14 @@ public class EntryService {
                 .collect(Collectors.toUnmodifiableSet());
     }
 
+    public Set<SingleAnswerDTO> getAnswersFoEntry(String entryId) {
+        if(!this.entryRepository.existsById(entryId))
+            throw new ResourceNotFoundException(ResourceNotFoundException.Message.THE_ENTRY_IS_NOT_EXISTS);
+        return this.answerRepository.findByParentId(entryId).stream()
+                .map(AnswerService.mapToDto())
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
     private Function<EntryEntity, EntryDTO> mapToDto() {
         return entry -> {
             var dto = new EntryDTO(
@@ -53,8 +66,10 @@ public class EntryService {
                             entry.getAnswers().stream().map(AnswerEntity::getAnswer)
                                     .collect(Collectors.toSet()) :
                             new HashSet<>());
-            Link linkToQuestions = WebMvcLinkBuilder.linkTo(EntryController.class).slash(entry.getId()).slash("questions").withRel("questions");
-            Link linkToAnswers = WebMvcLinkBuilder.linkTo(AnswerController.class).slash(entry.getId()).withRel("answers");
+            Link linkToQuestions = WebMvcLinkBuilder.linkTo(EntryController.class)
+                    .slash(entry.getId()).slash("questions").withRel("questions");
+            Link linkToAnswers = WebMvcLinkBuilder.linkTo(EntryController.class)
+                    .slash(entry.getId()).slash("answers").withRel("answers");
             dto.add(linkToQuestions);
             dto.add(linkToAnswers);
             return dto;
