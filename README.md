@@ -25,11 +25,14 @@ List the ready features:
 - Register user
 - Login/Logout
 - Display dump Entries
-
-List to implement:
 - Add new Entry
 - Add new Questions
 - Add new Answers
+- HATEOAS support 
+
+List to implement:
+- Update and remove
+- Deploy
 
 ## Project Status
 Project is: _in progress_ .
