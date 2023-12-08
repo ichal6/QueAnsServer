@@ -7,6 +7,7 @@ import pl.lechowicz.queansserver.entry.entity.AnswerEntity;
 import pl.lechowicz.queansserver.entry.entity.EntryEntity;
 import pl.lechowicz.queansserver.entry.entity.QuestionEntity;
 import pl.lechowicz.queansserver.entry.modelDTO.EntryDTO;
+import pl.lechowicz.queansserver.entry.service.EntryService;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,8 +17,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/entry")
 public class EntryController {
     private final EntryRepository entryRepository;
-    public EntryController(EntryRepository entryRepository) {
+    private final EntryService entryService;
+
+    public EntryController(EntryRepository entryRepository, EntryService entryService) {
         this.entryRepository = entryRepository;
+        this.entryService = entryService;
     }
 
     @GetMapping
@@ -35,6 +39,11 @@ public class EntryController {
                         x.getAnswers().stream().map(AnswerEntity::getAnswer)
                                 .collect(Collectors.toSet())
                 )).toList();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EntryDTO> getEntry(@PathVariable String id) {
+        return ResponseEntity.of(this.entryService.getSingleEntry(id));
     }
 
     @PostMapping()

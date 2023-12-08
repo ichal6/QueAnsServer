@@ -2,7 +2,7 @@ package pl.lechowicz.queansserver.user.entity;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.security.core.GrantedAuthority;
-import pl.lechowicz.queansserver.common.Entity;
+import pl.lechowicz.queansserver.common.entity.Entity;
 
 import java.util.Objects;
 

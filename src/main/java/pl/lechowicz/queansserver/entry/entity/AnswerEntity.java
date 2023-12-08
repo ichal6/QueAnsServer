@@ -1,6 +1,6 @@
 package pl.lechowicz.queansserver.entry.entity;
 
-import pl.lechowicz.queansserver.common.Entity;
+import pl.lechowicz.queansserver.common.entity.Entity;
 
 public class AnswerEntity extends Entity {
     private String answer;
