@@ -35,6 +35,13 @@ public class EntryService {
         this.answerRepository = answerRepository;
     }
 
+    public Set<EntryDTO> getAllEntries() {
+        return this.entryRepository.findAll()
+                .stream()
+                .map(mapToDto())
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
     public Optional<EntryDTO> getSingleEntry(String entryId) {
         return this.entryRepository.findById(entryId).map(mapToDto());
     }
@@ -47,7 +54,7 @@ public class EntryService {
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    public Set<SingleAnswerDTO> getAnswersFoEntry(String entryId) {
+    public Set<SingleAnswerDTO> getAnswersForEntry(String entryId) {
         if(!this.entryRepository.existsById(entryId))
             throw new ResourceNotFoundException(ResourceNotFoundException.Message.THE_ENTRY_IS_NOT_EXISTS);
         return this.answerRepository.findByParentId(entryId).stream()
@@ -58,6 +65,7 @@ public class EntryService {
     private Function<EntryEntity, EntryDTO> mapToDto() {
         return entry -> {
             var dto = new EntryDTO(
+                    entry.getId(),
                     (entry.getQuestions() != null) ?
                             entry.getQuestions().stream().map(QuestionEntity::getQuestion)
                                     .collect(Collectors.toSet()) :
@@ -74,5 +82,9 @@ public class EntryService {
             dto.add(linkToAnswers);
             return dto;
         };
+    }
+
+    public String newEntry() {
+        return this.entryRepository.save(new EntryEntity()).getId();
     }
 }

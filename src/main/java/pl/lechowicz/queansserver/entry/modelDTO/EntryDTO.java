@@ -6,10 +6,12 @@ import java.util.Objects;
 import java.util.Set;
 
 public class EntryDTO extends RepresentationModel<EntryDTO> {
+    private final String id;
     private final Set<String> questions;
     private final Set<String> answers;
 
-    public EntryDTO(Set<String> questions, Set<String> answers) {
+    public EntryDTO(String id, Set<String> questions, Set<String> answers) {
+        this.id = id;
         this.questions = questions;
         this.answers = answers;
     }
@@ -20,6 +22,10 @@ public class EntryDTO extends RepresentationModel<EntryDTO> {
 
     public Set<String> getAnswers() {
         return answers;
+    }
+
+    public String getId() {
+        return id;
     }
 
     @Override
