@@ -38,6 +38,10 @@ tasks.named('test') {
 
 apply plugin: 'java'
 
+bootJar {
+    archiveClassifier.set('boot')
+}
+
 jar {
-    dependsOn tasks.bootJar
+    archiveClassifier.set('')
 }
