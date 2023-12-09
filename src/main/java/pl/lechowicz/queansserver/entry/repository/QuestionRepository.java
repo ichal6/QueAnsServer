@@ -6,9 +6,12 @@ import org.springframework.stereotype.Repository;
 import pl.lechowicz.queansserver.entry.entity.QuestionEntity;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface QuestionRepository extends MongoRepository<QuestionEntity, String> {
     @Aggregation("{ $sample: { size: 1 } }")
     Optional<QuestionEntity> findRandom();
+
+    Set<QuestionEntity> findByParentId(String entryId);
 }

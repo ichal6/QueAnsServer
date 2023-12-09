@@ -1,7 +1,7 @@
 package pl.lechowicz.queansserver.user.entity;
 
 import org.springframework.data.mongodb.core.index.Indexed;
-import pl.lechowicz.queansserver.common.Entity;
+import pl.lechowicz.queansserver.common.entity.Entity;
 
 import java.util.Objects;
 import java.util.Set;

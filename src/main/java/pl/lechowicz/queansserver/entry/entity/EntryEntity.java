@@ -2,7 +2,7 @@ package pl.lechowicz.queansserver.entry.entity;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import pl.lechowicz.queansserver.common.Entity;
+import pl.lechowicz.queansserver.common.entity.Entity;
 
 import java.util.Set;
 
