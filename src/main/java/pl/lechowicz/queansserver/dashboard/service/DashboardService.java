@@ -17,7 +17,7 @@ public class DashboardService {
 
     public DashboardDTO getDashboard() {
         DashboardDTO dashboardDTO = new DashboardDTO(this.questionService.getRandomQuestion());
-        Link linkToEntry = WebMvcLinkBuilder.linkTo(EntryController.class).slash("/").withRel("all-entry");
+        Link linkToEntry = WebMvcLinkBuilder.linkTo(EntryController.class).slash("/").withRel("all-entries");
         dashboardDTO.add(linkToEntry);
 
         return dashboardDTO;
