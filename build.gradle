@@ -36,3 +36,13 @@ tasks.named('bootBuildImage') {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+apply plugin: 'java'
+
+bootJar {
+    archiveClassifier.set('boot')
+}
+
+jar {
+    archiveClassifier.set('')
+}
