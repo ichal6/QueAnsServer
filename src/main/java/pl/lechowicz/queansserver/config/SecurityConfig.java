@@ -116,7 +116,7 @@ public class SecurityConfig {
                 .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/api/**")).hasRole("USER")
                 .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/api/**")).hasRole("USER")
                 .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/**")).denyAll()
-                .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/**")).denyAll()
+                .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/**")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.PUT, "/**")).denyAll()
                 .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.POST, "/**")).denyAll()
                 .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.OPTIONS, "/**")).permitAll()

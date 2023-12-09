@@ -29,7 +29,8 @@ List the ready features:
 - Add new Entry
 - Add new Questions
 - Add new Answers
-- HATEOAS support 
+- HATEOAS support
+- Add dashboard
 
 List to implement:
 - Update and remove
