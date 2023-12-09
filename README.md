@@ -1,6 +1,6 @@
 # Questions and answers
 > There is an application for prepare to interview with questions and answers. 
-> Live server: [heroku](https://java-question-2ef22952c66d.herokuapp.com/api/entry)
+> Live server: [heroku](https://java-question-2ef22952c66d.herokuapp.com/)
 
 ## Table of Contents
 * [General Info](#general-information)
